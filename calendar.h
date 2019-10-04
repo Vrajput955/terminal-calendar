@@ -2,16 +2,23 @@
 #define CALENDAR_H
 
 #include "reminder.h"
+#define NUM_MONTHS 12
 
-enum Months {January, February, March, April, May, June, July, August, September, October, November, December};
-enum Days_of_week {Sunday, Monday, Tuesday, Wednesday, Thursday, Friday, Saturday};
-extern enum Months month;
-extern enum Days_of_week day;
-extern int starting_day[];
-extern int num_days[];
+enum Months;
+enum Days_of_week;
+struct Calendar;
+
+/*
+struct Calendar {
+    enum Months month;
+    enum Days_of_week day;
+    int starting_day[NUM_MONTHS];
+    int num_days[NUM_MONTHS];
+};
+*/
 
 //void choose_tframe(void);
-void disp_month(enum Months);
+void disp_month(struct Calendar*);
 void disp_year(void);
 void disp_menu(void);
 

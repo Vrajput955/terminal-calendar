@@ -10,6 +10,16 @@
 #define NUM_COLUMNS 7
 
 
+enum Months {January, February, March, April, May, June, July, August, September, October, November, December};
+enum Days_of_week {Sunday, Monday, Tuesday, Wednesday, Thursday, Friday, Saturday};
+
+struct Calendar {
+    enum Months month;
+    enum Days_of_week day;
+    int starting_day[NUM_MONTHS];
+    int num_days[NUM_MONTHS];
+};
+
 
 /*
 /void choose_tframe(void) {
@@ -17,13 +27,12 @@
 }
 */
 
-void disp_month(enum Months month) {
-    enum Days_of_week day;
+void disp_month(struct Calendar *calendar) {
     struct tm* current_time;
     char month_str[MAX_CHAR_IN_MONTH];
     int month_dates[NUM_ROWS][NUM_COLUMNS] = {0};
 
-    switch(month) {
+    switch(calendar->month) {
         case(January): strcpy(month_str, "January"); break;
         case(February): strcpy(month_str, "February"); break;
         case(March): strcpy(month_str, "March"); break;
@@ -38,12 +47,12 @@ void disp_month(enum Months month) {
         case(December): strcpy(month_str, "December"); break;
     }
 
-    day = starting_day[month];
+    calendar->day = calendar->starting_day[calendar->month];
 
-    for (int i = 1, j = 0; i <= num_days[month]; i++) {
-        month_dates[j][day++] = i;
-        if (day % 7 == 0) {
-           day = Sunday;
+    for (int i = 1, j = 0; i <= calendar->num_days[calendar->month]; i++) {
+        month_dates[j][calendar->day++] = i;
+        if (calendar->day % 7 == 0) {
+           calendar->day = Sunday;
            j++; 
         }
     }
