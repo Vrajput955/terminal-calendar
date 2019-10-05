@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <stdlib.h>
 #include <string.h>
 #include <ctype.h>
 #include <time.h>
@@ -12,12 +13,12 @@
 
 enum Months {January, February, March, April, May, June, July, August, September, October, November, December};
 enum Days_of_week {Sunday, Monday, Tuesday, Wednesday, Thursday, Friday, Saturday};
+int starting_day[NUM_MONTHS] = {Tuesday, Friday, Friday, Monday, Wednesday, Saturday, Monday, Thursday, Sunday, Tuesday, Friday, Sunday};
+int num_days[NUM_MONTHS] = {31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
 
 struct Calendar {
     enum Months month;
     enum Days_of_week day;
-    int starting_day[NUM_MONTHS];
-    int num_days[NUM_MONTHS];
 };
 
 
@@ -27,10 +28,13 @@ struct Calendar {
 }
 */
 
-void disp_month(struct Calendar *calendar) {
+void disp_month(enum Months month) {
+    struct Calendar *calendar = malloc(sizeof(struct Calendar));
     struct tm* current_time;
     char month_str[MAX_CHAR_IN_MONTH];
     int month_dates[NUM_ROWS][NUM_COLUMNS] = {0};
+
+    calendar->month = month;
 
     switch(calendar->month) {
         case(January): strcpy(month_str, "January"); break;
@@ -47,9 +51,9 @@ void disp_month(struct Calendar *calendar) {
         case(December): strcpy(month_str, "December"); break;
     }
 
-    calendar->day = calendar->starting_day[calendar->month];
+    calendar->day = starting_day[calendar->month];
 
-    for (int i = 1, j = 0; i <= calendar->num_days[calendar->month]; i++) {
+    for (int i = 1, j = 0; i <= num_days[calendar->month]; i++) {
         month_dates[j][calendar->day++] = i;
         if (calendar->day % 7 == 0) {
            calendar->day = Sunday;
@@ -66,11 +70,13 @@ void disp_month(struct Calendar *calendar) {
             if (month_dates[i][j])
                 printf("%-4d", month_dates[i][j]);
             else
-                printf("%-4c", '\0');
+                printf("%-4c", ' ');
         }
         newline;
     }
     newline;
+
+    free(calendar);
 }
 
 

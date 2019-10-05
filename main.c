@@ -4,7 +4,7 @@
 
 int main(void) {
 
-    disp_menu();
-
+    disp_year();
+    
     return 0;
 }
