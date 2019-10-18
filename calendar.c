@@ -79,6 +79,54 @@ void disp_month(enum Months month) {
     free(calendar);
 }
 
+/*----------------------------------------------------//
+*                  disp_chosen_month                  *
+*  Notes:                                             *              
+*      ~Add in input validation                       * 
+//----------------------------------------------------*/
+
+void disp_chosen_month(void) {
+    int choice;
+
+    printf("\nWhat month would you like to display?"); newline;
+    printf("\n---------------------------");
+    printf("\n|    1.  January          |");
+    printf("\n|    2.  February         |");
+    printf("\n|    3.  March            |");
+    printf("\n|    4.  April            |");
+    printf("\n|    5.  May              |");
+    printf("\n|    6.  June             |");
+    printf("\n|    7.  July             |");
+    printf("\n|    8.  August           |");
+    printf("\n|    9.  September        |");
+    printf("\n|    10. October          |");
+    printf("\n|    11. November         |");
+    printf("\n|    12. December         |");
+    printf("\n---------------------------"); newline;
+
+    do {
+        printf("\nEnter: ");
+
+        scanf("%d", &choice);
+        
+        switch(choice) {
+            case 1: disp_month(January); break;
+            case 2: disp_month(February); break;
+            case 3: disp_month(March); break;
+            case 4: disp_month(April); break;
+            case 5: disp_month(May); break;
+            case 6: disp_month(June); break;
+            case 7: disp_month(July); break;
+            case 8: disp_month(August); break;
+            case 9: disp_month(September); break;
+            case 10: disp_month(October); break;
+            case 11: disp_month(November); break;
+            case 12: disp_month(December); break;
+            default: printf("\nNot a valid choice...\n");
+        }
+    } while (choice < 1 || choice > 12);
+}
+
 
 void disp_year(void) {
     char year_str[CHARS_IN_YEAR+1];
@@ -91,17 +139,4 @@ void disp_year(void) {
     for (int i = January; i <= December; i++) {
         disp_month(i);
     }
-}
-
-
-void disp_menu(void) {
-    printf("\n|********************|");
-    printf("\n|        Menu        |");
-    printf("\n| 1. Display Year    |");
-    printf("\n| 2. Display Month   |");
-    printf("\n| 3. Set Reminder    |");
-    printf("\n| 4. Clear Reminders |");
-    printf("\n| 5. Quit            |");
-    printf("\n**********************");
-    newline;
 }

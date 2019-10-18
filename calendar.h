@@ -17,9 +17,9 @@ struct Calendar {
 };
 */
 
-//void choose_tframe(void);
-void disp_month(enum Months);
+void disp_chosen_month();
 void disp_year(void);
 void disp_menu(void);
+void menu(void);
 
 #endif
